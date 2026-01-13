@@ -3,61 +3,74 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>WAKE UP BITCH</title>
+    <title>Wait for it...</title>
     <style>
         body {
-            background-color: #000;
-            color: #fff;
-            font-family: 'Arial', sans-serif;
+            background-color: #ffe4e1; /* Cute Misty Rose */
+            font-family: 'Comic Sans MS', cursive, sans-serif;
             display: flex;
-            flex-direction: column;
-            align-items: center;
             justify-content: center;
+            align-items: center;
             height: 100vh;
             margin: 0;
+            overflow: hidden;
             text-align: center;
         }
-        h1 { font-size: 3rem; color: #ff0055; margin-bottom: 10px; }
-        h2 { font-size: 1.5rem; color: #00ffcc; }
-        .countdown { font-size: 2rem; margin: 20px; font-family: monospace; }
-        .hidden-msg { display: none; }
-        #confetti { position: absolute; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; }
+        .container {
+            background: white;
+            padding: 30px;
+            border-radius: 20px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+            max-width: 80%;
+        }
+        h1 { color: #ff69b4; font-size: 2rem; }
+        p { color: #555; }
+        .btn {
+            background: #ff69b4;
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 50px;
+            font-size: 1.2rem;
+            cursor: pointer;
+            transition: transform 0.2s;
+            text-decoration: none;
+            display: inline-block;
+            margin-top: 20px;
+        }
+        .btn:hover { transform: scale(1.1); }
+        .hidden { display: none; }
+        #final-msg h1 { color: #ff0000; font-size: 3rem; text-transform: uppercase; }
+        #final-msg h2 { color: #333; font-size: 1.5rem; }
+        .emoji { font-size: 3rem; }
     </style>
 </head>
 <body>
 
-    <div id="pre-birthday">
-        <h1>HOLD UP...</h1>
-        <div class="countdown" id="timer">Loading...</div>
+    <div id="step1" class="container">
+        <div class="emoji">🌸✨</div>
+        <h1>Wait... what day is it today?</h1>
+        <p>I think I forgot something super important...</p>
+        <button class="btn" onclick="showStep2()">Click to help me remember</button>
     </div>
 
-    <div id="birthday-msg" class="hidden-msg">
-        <h1>HAPPY BIRTHDAY! 🎂</h1>
-        <h2>NOW BITCH, COME TO SAC RIGHT NOW.</h2>
-        <p>Everyone is waiting. Don't be late.</p>
+    <div id="step2" class="container hidden">
+        <div id="final-msg">
+            <div class="emoji">🎂🎉</div>
+            <h1>HAPPY BIRTHDAY!!</h1>
+            <hr>
+            <h2>NOW BITCH, COME TO SAC RIGHT NOW.</h2>
+            <p>Don't make us wait. We're already here.</p>
+            <div class="emoji">🏃‍♂️💨</div>
+        </div>
     </div>
 
     <script>
-        // Set the birthday time (Tonight at 12:00 AM)
-        const birthday = new Date();
-        birthday.setHours(24, 0, 0, 0); 
-
-        function updateCountdown() {
-            const now = new Date();
-            const diff = birthday - now;
-
-            if (diff <= 0) {
-                document.getElementById('pre-birthday').style.display = 'none';
-                document.getElementById('birthday-msg').style.display = 'block';
-                return;
-            }
-
-            const mins = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
-            const secs = Math.floor((diff % (1000 * 60)) / 1000);
-            document.getElementById('timer').innerText = `${mins}m ${secs}s LEFT`;
+        function showStep2() {
+            document.getElementById('step1').classList.add('hidden');
+            document.getElementById('step2').classList.remove('hidden');
+            document.body.style.backgroundColor = "#ff0055"; // Changes to aggressive pink/red
         }
-
-        setInterval(updateCountdown, 1000);
     </script>
 </body>
 </html>
