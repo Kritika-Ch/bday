@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WAKE UP BITCH</title>
+    <style>
+        body {
+            background-color: #000;
+            color: #fff;
+            font-family: 'Arial', sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+            text-align: center;
+        }
+        h1 { font-size: 3rem; color: #ff0055; margin-bottom: 10px; }
+        h2 { font-size: 1.5rem; color: #00ffcc; }
+        .countdown { font-size: 2rem; margin: 20px; font-family: monospace; }
+        .hidden-msg { display: none; }
+        #confetti { position: absolute; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; }
+    </style>
+</head>
+<body>
+
+    <div id="pre-birthday">
+        <h1>HOLD UP...</h1>
+        <div class="countdown" id="timer">Loading...</div>
+    </div>
+
+    <div id="birthday-msg" class="hidden-msg">
+        <h1>HAPPY BIRTHDAY! 🎂</h1>
+        <h2>NOW BITCH, COME TO SAC RIGHT NOW.</h2>
+        <p>Everyone is waiting. Don't be late.</p>
+    </div>
+
+    <script>
+        // Set the birthday time (Tonight at 12:00 AM)
+        const birthday = new Date();
+        birthday.setHours(24, 0, 0, 0); 
+
+        function updateCountdown() {
+            const now = new Date();
+            const diff = birthday - now;
+
+            if (diff <= 0) {
+                document.getElementById('pre-birthday').style.display = 'none';
+                document.getElementById('birthday-msg').style.display = 'block';
+                return;
+            }
+
+            const mins = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+            const secs = Math.floor((diff % (1000 * 60)) / 1000);
+            document.getElementById('timer').innerText = `${mins}m ${secs}s LEFT`;
+        }
+
+        setInterval(updateCountdown, 1000);
+    </script>
+</body>
+</html>
